@@ -9,6 +9,8 @@ class HangmanGame
     private StringBuilder incorrectGuesses;
     private int remainingGuesses = 10;
 
+    private HashSet<char> guessedLetters = new HashSet<char>();
+
     public void Start()
     {
         // Select a random word from the array
@@ -70,6 +72,13 @@ class HangmanGame
 
     private void MakeLetterGuess(char letter)
     {
+        if (guessedLetters.Contains(letter))
+        {
+            return; // Do nothing if the letter has already been guessed
+        }
+
+        guessedLetters.Add(letter);
+        
         if (selectedWord.Contains(letter))
         {
             for (int i = 0; i < selectedWord.Length; i++)
